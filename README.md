@@ -1,11 +1,6 @@
 # Subscription platform
 
-
-## Installing Composer Dependencies For Existing Applications
-If you are developing an application with a team, you may not be the one that initially creates the Laravel application. Therefore, none of the application's Composer dependencies, including Sail, will be installed after you clone the application's repository to your local computer.
-
-You may install the application's dependencies by navigating to the application's directory and executing the following command. This command uses a small Docker container containing PHP and Composer to install the application's dependencies:
-
+To be able to run this example execute the code below to build docker
 
 ```
 docker run --rm \
@@ -16,4 +11,34 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
-When using the laravelsail/phpXX-composer image, you should use the same version of PHP that you plan to use for your application (74, 80, or 81).
+
+After docker has been built run commands below
+
+```
+    cp .env.example .env
+    
+    sail up
+    
+    sail composer install 
+    
+    sail artisan migrate
+    
+    sail artisan db:seed
+    
+```
+
+Open app at http://localhost
+
+MailHog http://localhost:8025/
+
+
+Command for sending emails
+
+```
+sail artisan subscription:send
+
+```
+
+
+In project root is Postman collection SubscriptionApp.postman_collection.json
+

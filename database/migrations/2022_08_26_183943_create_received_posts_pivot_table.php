@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('website_subscribers', function (Blueprint $table) {
+        Schema::create('sent_notifications', function (Blueprint $table) {
+            $table->foreignId('post_id');
             $table->foreignId('subscriber_id');
-            $table->foreignId('website_id');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('website_subscribers');
+        Schema::dropIfExists('sent_notifications');
     }
 };

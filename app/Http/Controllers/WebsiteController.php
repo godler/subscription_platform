@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Website\WebsiteCreator;
+use App\Http\Requests\WebsiteRequest;
 use App\Http\Resources\WebsiteResource;
 use App\Models\Website;
 use App\Repositories\WebsiteRepository;
@@ -11,7 +13,7 @@ use Illuminate\Http\Request;
 class WebsiteController extends Controller
 {
 
-    public function __construct(private WebsiteRepository $repository){
+    public function __construct(private WebsiteRepository $repository, private WebsiteCreator $creator){
 
     }
     /**
@@ -27,16 +29,17 @@ class WebsiteController extends Controller
     }
 
 
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  WebsiteRequest  $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(WebsiteRequest $request)
     {
-        //
+        $this->creator->create($request->toArray());
+
+        return response()->json(['message' => 'ok']);
     }
 
 

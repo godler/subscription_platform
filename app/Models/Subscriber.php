@@ -17,5 +17,10 @@ class Subscriber extends Model
         return $this->belongsToMany(Website::class, 'website_subscribers', 'subscriber_id', 'website_id');
     }
 
+    public function received_notifications()
+    {
+        return $this->belongsToMany(Post::class, 'sent_notifications', 'subscriber_id', 'post_id');
+    }
+
 
 }
